@@ -23,23 +23,24 @@
 #
 # print(f"""Součet je {total}!""")
 
-# 3 - tabulka hodnot gon fcí
-import math as m
 
-angle = 0
-print("uhel\t\tsin \t\t\tcos \t\t\ttg  \t\t\tcotg")
-while angle <= 90:
-    angle_rad = m.radians(angle)
-    value_sin = "%0.3f" % m.sin(angle_rad)
-    value_cos = "%0.3f" % m.cos(angle_rad)
-    if angle == 90:
-        value_tg = "UD   "
-    else:
-        value_tg = "%0.3f" % m.tan(angle_rad)
-
-    if angle == 0:
-        value_cotg = "UD   "
-    else:
-        value_cotg = "%0.3f" % m.sin(angle_rad)
-    print(f"""{angle}°\t\t\t{value_sin}\t\t\t{value_cos}\t\t\t{value_tg}\t\t\t{value_cotg}""")
-    angle += 5
+# # 3 - tabulka hodnot gon fcí
+# import math as m
+#
+# angle = 0
+# print("uhel\t\tsin \t\t\tcos \t\t\ttg  \t\t\tcotg")
+# while angle <= 90:
+#     angle_rad = m.radians(angle)
+#     value_sin = "%0.3f" % m.sin(angle_rad)
+#     value_cos = "%0.3f" % m.cos(angle_rad)
+#     if angle == 90:
+#         value_tg = "UD   "
+#     else:
+#         value_tg = "%0.3f" % m.tan(angle_rad)
+#
+#     if angle == 0:
+#         value_cotg = "UD   "
+#     else:
+#         value_cotg = "%0.3f" % m.sin(angle_rad)
+#     print(f"""{angle}°\t\t\t{value_sin}\t\t\t{value_cos}\t\t\t{value_tg}\t\t\t{value_cotg}""")
+#     angle += 5
