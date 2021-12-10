@@ -1,4 +1,4 @@
-# # 1 - heslo
+# 1 - heslo
 def heslo():
     input_password = input("Zadejte heslo: ")
     password = "monitor"
@@ -13,7 +13,7 @@ def heslo():
         input_password = input("Heslo bylo zadáno špatně, zadejte ho znovu: ")
 
 
-# # 2 - součet n hodnot
+# 2 - součet n hodnot
 def soucet_n():
     n = int(input("Zadejte číslo n: "))
     i = 1
@@ -26,7 +26,7 @@ def soucet_n():
     print(f"""Součet je {total}!""")
 
 
-# # 3 - tabulka hodnot gon fcí
+# 3 - tabulka hodnot gon fcí
 import math as m
 
 def gon_fce():
@@ -49,7 +49,7 @@ def gon_fce():
         angle += 5
 
 
-# # 4 Převod do bin z decimal
+# 4 Převod do bin z decimal
 def prevod():
     number_d = int(input("Zadejte číslo: "))
     number_b = ''
@@ -73,6 +73,7 @@ def prevod():
 
     print(number_b)
 
+# spuštění
 while True:
     user_input = input("Zadejte úkol(prevod, heslo, soucet_n, gon_fce, pro konec \"end\"): ")
     if user_input == "prevod":
