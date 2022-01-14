@@ -67,10 +67,40 @@ def vypis_delitelu():
                 print(str(i + 1) + ' ', end="")
         print()
 
+# pyramida
+def pyramida():
+    n_vyska = int(input("Zadejte výšku pyramidy: "))
+    hvezdy = 1
+    for i in range(n_vyska +1):
+        print(" " * (n_vyska - i) + "*"*hvezdy)
+        hvezdy += 2
+
+# šachovnice
+def sachovnice():
+    tec = '. '
+    zav = '@ '
+    for i in range(8):
+        for j in range(4):
+            if i % 2:
+                print(zav + tec, end='')
+            else: print(tec + zav, end='')
+        print()
+
+# heslo
+import random
+def heslo():
+    pismena = "abcdrfghijklmnopqrstuvwxyz"
+    pocet_hesel = int(input("Zadejte počet hesel: "))
+    for i in range(pocet_hesel):
+        heslo = ''
+        for j in range(7):
+            heslo += pismena[random.randint(0, len(pismena) - 1)]
+        print(f"""{ i + 1 }. heslo je: { heslo }""")
 
 # spuštění
 while True:
-    user_input = input("Zadejte úkol(vložení hvězdičky, počítání a, ciferný součet, dnešní datum, jména, výpis, výpis dělitelů, pro konec \"end\"): ")
+    user_input = input("Zadejte úkol(vložení hvězdičky, počítání a, ciferný součet, dnešní datum, "
+                       "jména, výpis, výpis dělitelů, pyramida, šachovnice, heslo, pro konec \"end\"): ")
     if user_input == "vložení hvězdičky":
         vlozeni_hvezdicky()
     elif user_input == "počítání a":
@@ -85,6 +115,12 @@ while True:
         vypis()
     elif user_input == "výpis dělitelů":
         vypis_delitelu()
+    elif user_input == "pyramida":
+        pyramida()
+    elif user_input == "šachovnice":
+        sachovnice()
+    elif user_input == "heslo":
+        heslo()
     elif user_input == "end":
         break
     else: print("Zadej to správně!")
