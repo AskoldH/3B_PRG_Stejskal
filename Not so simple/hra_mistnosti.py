@@ -238,4 +238,4 @@ while game_on:
                 user_input = input(f"""Jajx, {user_input} neodpovídá příkazu!\nZkus to prosím znova: """).lower()
 
     else:
-        user_input = input(f"""Jajx, {user_input} neodpovídá příkazu!\nZkus to prosím znova: """).lower()
+        user_input = input( f"""Jajx, {user_input} neodpovídá příkazu!\nZkus to prosím znova: """).lower()
