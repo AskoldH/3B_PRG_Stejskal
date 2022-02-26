@@ -72,7 +72,7 @@ class CardPile():
         return card
 
     def show_top_card(self):
-        print("\n" + f"Na vrcholu hromádky je karta {self.top_card}")
+        print(f"Na vrcholu hromádky je karta {self.top_card}")
 
 
 class HumanPlayer():
@@ -98,7 +98,7 @@ class HumanPlayer():
 
     def check_human_win(self):
         if not len(self.card_deck):
-            print(f"\nMusím prohlásit, že {self.name} je velice dobrým hráčem prší, gratuluji vyhrál jsi!!")
+            print(f"\nPapadááá, dadada da tadá. Musím prohlásit, že {self.name} je velice dobrým hráčem prší, gratuluji vyhrál jsi!!")
             return True
         return False
 
@@ -187,14 +187,16 @@ def main():
                     # reset pc_move after casting ace
                     pc_move = True
 
+                    print()
                     pile.show_top_card()
                     human.show_cards()
                     print(f"Počet karet tvého protivníka je {len(pc.card_deck)}!")
                     user_input = input(
-                        "Zadejte pořadí karty, kterou chcete odhodit nebo \"vzít\" pro kartu z hromádky: ")
+                        "Zadejte pořadí karty, kterou chcete odhodit nebo \"v\" pro sejmutí kartu z hromádky: ")
 
+                    pile.show_top_card()
                     # user wanna get card from deck
-                    if user_input == "vzít":
+                    if user_input == "v":
                         human.get_cards(deck.generated_deck, 1)
                         break
 
@@ -230,7 +232,7 @@ def main():
                     # player casted queen
                     elif returned_value == "queen":
                         chosen_by_user = input(
-                            "Po vyhození dámy si můžeš vybrat změnu barvy, vyber pomocí pořadí (♥-1, ♦-2, ♠-3, ♣-4):")
+                            "Po vyhození dámy si můžeš vybrat změnu barvy, vyber pomocí pořadí (♥-1, ♦-2, ♠-3, ♣-4): ")
                         if chosen_by_user == '1':
                             chosen_color = '♥'
                         elif chosen_by_user == '2':
@@ -245,7 +247,8 @@ def main():
                     # player casted off not valid card
                     elif returned_value:
                         human.card_deck.insert(int(user_input) - 1, returned_value)
-                    continue
+                        continue
+                    break # important
 
                 # pc move
                 while pc_move:
@@ -265,6 +268,7 @@ def main():
 
                             # pc put on top "attack" card
                             if returned_value == 2 or returned_value == 4:
+                                print(f"\nProtivník vyhodil útočnou kartu, bereš { returned_value } karty!")
                                 human.get_cards(deck.generated_deck, returned_value)
                                 player_move = False
 
@@ -274,7 +278,7 @@ def main():
 
                             elif returned_value == "queen":
                                 chosen_color = pc.most_frequent()
-                                print(f"Protivník změnil dámou barvu na \'{chosen_color}\!'")
+                                print(f"\nProtivník změnil dámou barvu na \'{chosen_color}\'!'")
 
                             valid_card_found = True
                             break
