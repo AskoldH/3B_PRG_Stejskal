@@ -25,9 +25,14 @@ def VratSeznam(pocet, od, do):
 
 import random
 def ZasifrujText(text):
-    abc = "abcdefghijklmnopqrstuvwxyz"
-    for i in range(len(text)):
-        rnd = random.choice(abc)
+    letters = "abcdefghijklmnopqrstuvwxyz"
+    new_text = ''
+    for letter in text:
+        rnd_letter = random.choice(letters)
+        new_text += letter + rnd_letter
+
+    return new_text
+
 
 def main():
     # AnaX(5, 3)
@@ -35,7 +40,7 @@ def main():
     # print(Prumer(1, 1, 2))
     # print(Kostka())
     # print(VratSeznam(4, 10, 15))
-    ZasifrujText("Ahoj")
+    print(ZasifrujText("Ahoj"))
 
 if __name__ == '__main__':
     main()
