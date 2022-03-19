@@ -4,7 +4,7 @@ import random
 class Deck():
     def __init__(self):
         # creating random mixed deck -> init deck
-        card_values = ["ESO", "2", "3", "4", "5", "6", "7", "8", "9", "10", "JUNÁK", "DÁMA", "KRÁL"]
+        card_values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
         self.generated_deck = []
 
         not_used_card_values_hearts = card_values.copy()
@@ -51,7 +51,7 @@ class CardPile():
 
     def put_card_on_top(self, deck, card, color=None):
         # check validity
-        if self.top_card[0] == card[0] or self.top_card[1] == card[1] or color == card[0]:
+        if (self.top_card[0] == card[0] and color == None) or self.top_card[1] == card[1] or color == card[0]:
             # put into deck
             deck.append(self.top_card)
             self.top_card = card
@@ -60,9 +60,9 @@ class CardPile():
                 return 2
             elif card[0] == '♠' and card[1] == 'K':
                 return 4
-            elif card[1] == 'E':
+            elif card[1] == 'A':
                 return "ace"
-            elif card[1] == 'D':
+            elif card[1] == 'Q':
                 return "queen"
             return False
 
@@ -72,13 +72,14 @@ class CardPile():
         return card
 
     def show_top_card(self):
-        print(f"Na vrcholu hromádky je karta {self.top_card}")
+        print(f"Na vrcholu hromádky je karta {self.top_card}!")
 
 
 class HumanPlayer():
     def __init__(self):
         self.name = input(
-            "Zdravím, vítej u snad všem známe hry prší, tentokrát ale v Pythonu!! Prosím zadej své jméno: ")
+            "\nZdravím, vítej u snad všem známe hry prší, tentokrát ale v Pythonu!! Prosím zadej své jméno: ")
+        print("Hra začíná!")
         self.card_deck = []
 
     # get card/cards from given deck
@@ -90,7 +91,7 @@ class HumanPlayer():
         print("V ruce máš: ", end="")
         for card in self.card_deck:
             print(f"|{card}", end="")
-        print("|")
+        print(f"| -> celkem {len(self.card_deck)}!")
 
     # from player deck pop card
     def put_card_into_pile(self, index):
@@ -98,7 +99,8 @@ class HumanPlayer():
 
     def check_human_win(self):
         if not len(self.card_deck):
-            print(f"\nPapadááá, dadada da tadá. Musím prohlásit, že {self.name} je velice dobrým hráčem prší, gratuluji vyhrál jsi!!")
+            print(
+                f"\nPapadááá, dadada da tadá. Musím prohlásit, že {self.name} je velice dobrým hráčem prší, gratuluji vyhrál jsi!!\n")
             return True
         return False
 
@@ -149,14 +151,18 @@ class PCPlayer():
 
     def show_lose_for_player(self, player_deck):
         print(
-            f"Obávám se, že jsi prohrál, počítač má prázdnou ruku ale ty v ní máš ještě {' '.join(str(x) for x in player_deck)}!!")
+            f"\nObávám se, že jsi prohrál, protivník má prázdnou ruku ale ty v ní máš ještě {' '.join(str(x) for x in player_deck)}!!\n")
 
 
 def main():
     while True:
-        user_input = input("Pro novou hru zadej \"new\" a pro ukončení \"exit\": ")
+        user_input = input("Menu hry ->"
+                           "\n  Nová hra -> 1"
+                           "\n  Ukončení -> 2"
+                           "\n  Pravidla -> 3"
+                           "\nTvá volba: ")
 
-        if user_input == "new":
+        if user_input == "1":
             # init
             deck = Deck()
             human = HumanPlayer()
@@ -187,14 +193,13 @@ def main():
                     # reset pc_move after casting ace
                     pc_move = True
 
-                    print()
+                    print("\nTvůj tah:")
                     pile.show_top_card()
                     human.show_cards()
                     print(f"Počet karet tvého protivníka je {len(pc.card_deck)}!")
                     user_input = input(
                         "Zadejte pořadí karty, kterou chcete odhodit nebo \"v\" pro sejmutí kartu z hromádky: ")
 
-                    pile.show_top_card()
                     # user wanna get card from deck
                     if user_input == "v":
                         human.get_cards(deck.generated_deck, 1)
@@ -209,7 +214,7 @@ def main():
 
                     # check user input index validity
                     if int(user_input) - 1 > len(human.card_deck) or int(user_input) - 1 < 0:
-                        print("!!Zadal jsi špatné pořadí mimo možnosti!!")
+                        print("!!Zadal jsi špatné pořadí mimo možnosti - hraj znova!!")
                         continue
 
                     # cast off card
@@ -231,24 +236,30 @@ def main():
 
                     # player casted queen
                     elif returned_value == "queen":
-                        chosen_by_user = input(
-                            "Po vyhození dámy si můžeš vybrat změnu barvy, vyber pomocí pořadí (♥-1, ♦-2, ♠-3, ♣-4): ")
-                        if chosen_by_user == '1':
-                            chosen_color = '♥'
-                        elif chosen_by_user == '2':
-                            chosen_color = '♦'
-                        elif chosen_by_user == '3':
-                            chosen_color = '♠'
-                        elif chosen_by_user == '4':
-                            chosen_color = '♣'
-                        else:
-                            print("Po vyhození dámy jsi špatně vybral změnu barvy!")
+                        while True:
+                            chosen_by_user = input(
+                                "Po vyhození dámy si můžeš vybrat změnu barvy, vyber pomocí pořadí (♥-1, ♦-2, ♠-3, ♣-4): ")
+                            if chosen_by_user == '1':
+                                chosen_color = '♥'
+                                break
+                            elif chosen_by_user == '2':
+                                chosen_color = '♦'
+                                break
+                            elif chosen_by_user == '3':
+                                chosen_color = '♠'
+                                break
+                            elif chosen_by_user == '4':
+                                chosen_color = '♣'
+                                break
+                            else:
+                                print("Po vyhození dámy jsi špatně vybral změnu barvy!")
 
                     # player casted off not valid card
                     elif returned_value:
                         human.card_deck.insert(int(user_input) - 1, returned_value)
                         continue
-                    break # important
+
+                    break  # important
 
                 # pc move
                 while pc_move:
@@ -258,9 +269,12 @@ def main():
                     valid_card_found = False
 
                     # going through deck -> trying to find valid card
+                    print("\nTah protivníka:")
+                    pile.show_top_card()
                     for card in pc.card_deck:
                         if card[0] == pile.top_card[0] or card[1] == pile.top_card[1]:
                             returned_value = pile.put_card_on_top(deck.generated_deck, card, chosen_color)
+                            print(f"Protivník vyhodil {card}!")
                             pc.card_deck.remove(card)
 
                             # reset chosen color
@@ -268,13 +282,14 @@ def main():
 
                             # pc put on top "attack" card
                             if returned_value == 2 or returned_value == 4:
-                                print(f"\nProtivník vyhodil útočnou kartu, bereš { returned_value } karty!")
+                                print(f"\nProtivník vyhodil útočnou kartu, bereš {returned_value} karty!")
                                 human.get_cards(deck.generated_deck, returned_value)
                                 player_move = False
 
                             # pc casted off top ace
                             elif returned_value == "ace":
                                 player_move = False
+                                print("Protivník vyhodil eso, hraje znova!")
 
                             elif returned_value == "queen":
                                 chosen_color = pc.most_frequent()
@@ -285,13 +300,28 @@ def main():
 
                     if not valid_card_found:
                         pc.get_cards(deck.generated_deck)  # valid card not found -> pc gets card
+                        print("Protivník si vzal kartu z balíčku!")
                     break
-        elif user_input == "exit":
+        elif user_input == "2":
             print("Třeba příště, čau.")
             break
 
+        elif user_input == "3":
+            input("\nZákladní pravidla hry jsou: "
+                  "\nNa začátku hry si vezmeš 4 karty, stejně tak si je vezme počítač."
+                  "\nVyhrává ten, kdo nebude mít v ruce žádné karty, do hry nelze"
+                  "\nprotivníka vrátit. Bojové karty nelze přebíjet. Dámu lze hodit"
+                  "\njen na kartu se stejnou barvou."
+                  "\nÚtočné karty -> "
+                  "\n   Sedmička -> za jakoukoli kartu s číslem 7 se berou dvě karty"
+                  "\n   Pikový král -> za pikového krále se berou čtyři karty"
+                  "\nOstatní karty ->"
+                  "\n   Eso -> po vyhození esa protivník kolo stojí neboli hraješ znova"
+                  "\n   Dáma -> po vyhození dámy si vybíráš novou barvu"
+                  "\n\n(Pro pokračování stiskni jakoukoli klávesu)\n")
+
         else:
-            print("Zadej to správně prosím!")
+            print("\nZadej to správně prosím!\n")
 
 
 if __name__ == '__main__':
