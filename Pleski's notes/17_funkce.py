@@ -39,8 +39,9 @@ def main():
     # Linear(4, 2)
     # print(Prumer(1, 1, 2))
     # print(Kostka())
-    print(VratSeznam(4, 10, 15))
+    # print(VratSeznam(4, 10, 15))
     # print(ZasifrujText("Ahoj"))
+    pass
 
 if __name__ == '__main__':
     main()
