@@ -1,10 +1,3 @@
-# Napište program pro simulaci bankovního účtu. Bude mít 3 funkce:
-#    Vklad(castka) - přidá peníze na účet
-#    Vyber(castka) - odebere peníze z účtu
-#    Zustatek()    - vypíše zůstatek na účtu
-#    S účtem budou funkce pracovat jako s globální proměnnou 'ucet'.
-#    Snažte se v programu přehledně komunikovat s uživatelem.
-
 ucet = 0
 
 def vklad(vklad_v_kc):
